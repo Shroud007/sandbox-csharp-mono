@@ -1,13 +1,13 @@
 services:
 
-  sandbox-csharp-mono:
+  sandbox-csharp:
     build:
       context: ..
       args:
         - SANDBOX_USER_UID=999
         - SANDBOX_DIR=/sandbox
       dockerfile: ./docker/Dockerfile
-    container_name: sandbox-csharp-mono
+    container_name: sandbox-csharp
     image: sandbox-csharp-mono
     volumes:
       - ../src:/app/src
