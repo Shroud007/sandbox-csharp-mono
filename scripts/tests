@@ -1,0 +1,2 @@
+#!/bin/bash
+docker exec -it sandbox-csharp-mono pytest -vv -p no:cacheprovider /app/src

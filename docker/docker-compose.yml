@@ -1,0 +1,31 @@
+services:
+
+  sandbox-csharp-mono:
+    build:
+      context: ..
+      args:
+        - SANDBOX_USER_UID=999
+        - SANDBOX_DIR=/sandbox
+      dockerfile: ./docker/Dockerfile
+    container_name: sandbox-csharp-mono
+    image: sandbox-csharp-mono
+    volumes:
+      - ../src:/app/src
+      - import:/sandbox/import:ro
+    ports:
+      - "9007:9007"
+    networks:
+      - localhost
+    environment:
+      - SANDBOX_USER_UID=999
+      - SANDBOX_DIR=/sandbox
+    restart: on-failure
+    command: gunicorn --pythonpath '/app/src' --bind 0:9007 app.main:app --reload -w 1
+
+networks:
+  localhost:
+    external: true
+
+volumes:
+  import:
+    external: true
